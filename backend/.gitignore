@@ -21,7 +21,10 @@ venv/
 # Local database file
 backend/db.sqlite3
 db.sqlite3
-
+#static
+staticfiles/
+static/
+media/
 # Python cache and compiled files
 __pycache__/
 *.pyc
