@@ -16,9 +16,11 @@ Thumbs.db
 # --- Python / Django Backend ---
 # Virtual environment
 backend/venv/
+venv/
 
 # Local database file
 backend/db.sqlite3
+db.sqlite3
 
 # Python cache and compiled files
 __pycache__/

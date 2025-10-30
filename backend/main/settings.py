@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',
     'store',
+    'orders',
     # 3rd-party apps
     'rest_framework',
     'rest_framework_simplejwt',
@@ -184,3 +185,9 @@ MEDIA_URL = '/media/'
 
 # This is the physical path on your server where files will be stored
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# -----------------------------------------------------------------
+# RAZORPAY CONFIGURATION
+# -----------------------------------------------------------------
+RAZORPAY_KEY_ID = config('RAZORPAY_KEY_ID')
+RAZORPAY_KEY_SECRET = config('RAZORPAY_KEY_SECRET')

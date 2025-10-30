@@ -25,6 +25,10 @@ urlpatterns = [
     # --- Include our new 'users' app URLs ---
     # All URLs from 'users/urls.py' will be prefixed with 'api/auth/'
     path('api/auth/', include('users.urls')),
+    path('api/', include('store.urls')),
+    
+    # --- Orders App ---
+    path('api/orders/', include('orders.urls')),
 ]
 
 if settings.DEBUG:
