@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import api from '../utils/api' // <-- Import our new API client
+import { Link } from 'react-router-dom'
 
 function HomePage() {
   // We'll use state to store our products, loading status, and any errors
@@ -46,7 +47,7 @@ function HomePage() {
     return <div className="text-center text-red-500">{error}</div>
   }
 
-  // --- Success: Render the products ---
+// --- Success: Render the products ---
   return (
     <div>
       <h1 className="text-3xl font-bold mb-6">Our Products</h1>
@@ -56,28 +57,34 @@ function HomePage() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {products.map((product) => (
-            <div key={product.id} className="border rounded-lg p-4 shadow-lg">
-              {/* Note: We'll fix the image URL later.
-                  It needs the full backend address. */}
+            
+            // --- 2. Add the Link component here ---
+            <Link 
+              key={product.id} 
+              to={`/products/${product.slug}`} // <-- Links to the detail page
+              className="border rounded-lg p-4 shadow-lg hover:shadow-xl transition-shadow"
+            >
               {product.image && (
                 <img 
-                  src={`http://127.0.0.1:8000${product.image}`} 
+                  src={product.image} // We use the full URL from the API
                   alt={product.name} 
                   className="w-full h-48 object-cover rounded-md mb-4"
                 />
               )}
               <h2 className="text-xl font-semibold">{product.name}</h2>
-              <p className="text-gray-700 mt-2">{product.description}</p>
+              <p className="text-gray-700 mt-2 truncate">{product.description}</p>
               <p className="text-lg font-bold mt-4">${product.price}</p>
               <p className="text-sm text-gray-500">
                 Sold by: {product.seller_name}
               </p>
-            </div>
+            </Link>
+            // --- 3. End the Link component ---
+            
           ))}
         </div>
       )}
     </div>
-  )
+  );
 }
 
-export default HomePage
+export default HomePage;

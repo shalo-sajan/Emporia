@@ -1,5 +1,5 @@
 # users/serializers.py
-
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
 from .models import CustomUser
 
@@ -41,3 +41,17 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             role=validated_data.get('role', CustomUser.Role.CUSTOMER) # Defaults to Customer
         )
         return user
+    
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        # This is the default method, which creates the token
+        token = super().get_token(user)
+
+        # --- Add custom claims ---
+        # We add the user's data to the token
+        token['email'] = user.email
+        token['username'] = user.username
+        token['role'] = user.role
+        
+        return token

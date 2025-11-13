@@ -28,10 +28,11 @@ api.interceptors.request.use(
     // We'll get the token from localStorage
     // We'll write the logic to store this token when we build the login page
     const token = localStorage.getItem('authToken'); 
+    const acessToken = token ? JSON.parse(token).access : null;
     
     if (token) {
       // Add the 'Bearer' token to the header
-      config.headers.Authorization = `Bearer ${token}`;
+      config.headers.Authorization = `Bearer ${acessToken}`;
     }
     return config;
   },
